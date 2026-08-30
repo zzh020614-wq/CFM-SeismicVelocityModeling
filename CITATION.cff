@@ -1,0 +1,33 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite both the software and the accompanying paper."
+title: "tdcfm: time-domain conditional flow matching for seismic velocity model building"
+abstract: >-
+  Reference implementation of a conditional flow matching model that generates
+  time-domain interval velocity models from an RMS velocity field, sparse well
+  logs, a migrated image and a geological-pattern label, together with the
+  synthetic dataset generator and the evaluation code.
+version: "1.0.0"
+license: MIT
+type: software
+# TODO: complete the author list before submission.
+authors:
+  - family-names: "FAMILY-NAME"
+    given-names: "GIVEN-NAME"
+    # orcid: "https://orcid.org/0000-0000-0000-0000"
+    # affiliation: "Institution"
+keywords:
+  - flow matching
+  - generative model
+  - seismic velocity model building
+  - geophysics
+  - deep learning
+# TODO: fill in once the paper is accepted.
+preferred-citation:
+  type: article
+  title: "TITLE OF THE PAPER"
+  journal: "Computers & Geosciences"
+  year: 2026
+  authors:
+    - family-names: "FAMILY-NAME"
+      given-names: "GIVEN-NAME"
+  # doi: "10.1016/j.cageo.XXXX.XXXXXX"

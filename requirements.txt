@@ -1,0 +1,12 @@
+# Stage 1-3 (dataset synthesis and condition forward modelling) -- CPU only
+numpy>=1.24
+scipy>=1.10
+h5py>=3.8
+matplotlib>=3.7
+
+# Stage 4-5 (training, inference, evaluation) -- CUDA recommended
+torch>=2.1
+torchvision>=0.16
+tqdm>=4.65
+POT>=0.9            # imported as `ot`; required by the optimal-transport CFM coupling
+torchcfm==1.0.7     # flow-matching objectives and the UNet backbone

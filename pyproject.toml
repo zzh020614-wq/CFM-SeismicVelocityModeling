@@ -1,0 +1,45 @@
+[build-system]
+requires = ["setuptools>=64"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "tdcfm"
+version = "1.0.0"
+description = "Time-domain conditional flow matching for seismic initial velocity model building"
+readme = "README.md"
+requires-python = ">=3.9"
+license = { text = "MIT" }
+keywords = ["flow matching", "generative model", "seismic velocity model", "geophysics"]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Topic :: Scientific/Engineering",
+]
+dependencies = [
+    "numpy>=1.24",
+    "scipy>=1.10",
+    "h5py>=3.8",
+    "matplotlib>=3.7",
+]
+
+[project.optional-dependencies]
+# Everything needed to train, sample and evaluate. Stages 1-3 run without it.
+train = [
+    "torch>=2.1",
+    "torchvision>=0.16",
+    "tqdm>=4.65",
+    "POT>=0.9",
+    "torchcfm==1.0.7",
+]
+
+[project.scripts]
+tdcfm-synth = "tdcfm.synth.generate:main"
+tdcfm-timeconv = "tdcfm.timeconv.run:main"
+tdcfm-conditions = "tdcfm.conditions.run:main"
+tdcfm-train = "tdcfm.training.train:main"
+tdcfm-sample = "tdcfm.inference.sample:main"
+tdcfm-evaluate = "tdcfm.evaluation.evaluate:main"
+tdcfm-baselines = "tdcfm.evaluation.baselines:main"
+
+[tool.setuptools.packages.find]
+include = ["tdcfm*"]

@@ -1,0 +1,19 @@
+# Generated datasets and training artefacts (tens of GB, never committed)
+data/
+runs/
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+.venv/
+venv/
+.pytest_cache/
+
+# Editors / OS
+.DS_Store
+.idea/
+.vscode/
+*.swp
