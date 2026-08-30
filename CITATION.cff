@@ -7,27 +7,31 @@ abstract: >-
   logs, a migrated image and a geological-pattern label, together with the
   synthetic dataset generator and the evaluation code.
 version: "1.0.0"
+date-released: "2026-08-30"
 license: MIT
 type: software
-# TODO: complete the author list before submission.
-authors:
-  - family-names: "FAMILY-NAME"
-    given-names: "GIVEN-NAME"
-    # orcid: "https://orcid.org/0000-0000-0000-0000"
-    # affiliation: "Institution"
+repository-code: "https://github.com/zzh020614-wq/TDCFM-SeismicVelocityModeling"
 keywords:
   - flow matching
   - generative model
   - seismic velocity model building
   - geophysics
   - deep learning
-# TODO: fill in once the paper is accepted.
+# TODO before submission: replace with the author list exactly as it appears on
+# the paper, and add ORCID and affiliation for each author.
+authors:
+  - family-names: "PLACEHOLDER-FAMILY-NAME"
+    given-names: "PLACEHOLDER-GIVEN-NAME"
+    # orcid: "https://orcid.org/0000-0000-0000-0000"
+    # affiliation: "Institution"
+# TODO once the paper is accepted: fill in the title, volume, pages and DOI, and
+# mirror the author list above.
 preferred-citation:
   type: article
-  title: "TITLE OF THE PAPER"
+  title: "PLACEHOLDER-PAPER-TITLE"
   journal: "Computers & Geosciences"
   year: 2026
   authors:
-    - family-names: "FAMILY-NAME"
-      given-names: "GIVEN-NAME"
+    - family-names: "PLACEHOLDER-FAMILY-NAME"
+      given-names: "PLACEHOLDER-GIVEN-NAME"
   # doi: "10.1016/j.cageo.XXXX.XXXXXX"

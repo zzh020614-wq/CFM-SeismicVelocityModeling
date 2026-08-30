@@ -39,8 +39,8 @@ velocity in the vertical two-way-time sense.
 
 **Stage 3 — condition forward modelling.** From the time-domain truth: the RMS
 velocity field by Dix forward modelling followed by Gaussian smoothing; the well
-condition by extracting columns of the truth at stratified random positions;
-and the migrated image by convolving the reflectivity
+condition by extracting columns of the truth at the well positions; and the
+migrated image by convolving the reflectivity
 `r = (vᵢ₊₁ − vᵢ)/(vᵢ₊₁ + vᵢ)` with a Ricker wavelet of 25–30 Hz dominant
 frequency plus band-limited noise.
 
@@ -108,22 +108,30 @@ Stage 3 writes four channels per sample, in this order:
 | Channel | Content |
 |---|---|
 | 0 | RMS velocity field: Dix forward model of the truth, Gaussian smoothed with σ = (9, 4) samples |
-| 1 | Well velocities: 4 wells × 3 columns, stratified random positions |
+| 1 | Well velocities: 3–8 single columns of the truth at random positions (placeholder, see below) |
 | 2 | Well mask, binary |
 | 3 | Migrated image: reflectivity ⊛ Ricker (25–30 Hz) plus band-limited noise |
 
-The training dataloader may strengthen or weaken two of them without
-regenerating the dataset:
+The training dataloader rewrites two of these, so their strength can be changed
+without regenerating the dataset:
 
 * **RMS smoothing** is additive in variance, `σ_total² = σ_base² + σ_extra²`, so
   the loader only applies the difference between the target σ and the σ = (9, 4)
   already on disk. Smoothing cannot be undone, so a target below the baseline
-  falls back to the baseline with a warning.
-* **The well condition** is rebuilt from the label. Depth-to-time conversion is
-  purely vertical and per trace, so the time-domain log at trace `c` is exactly
-  column `c` of the label; the number and width of the wells are therefore free
-  parameters at training time. `tests/test_wells.py` asserts that the rebuilt
-  condition is identical to the one stage 3 wrote under matching settings.
+  falls back to the baseline with a warning. The training configuration used
+  here is σ = (59, 26) samples, i.e. 702 ms × 650 m.
+* **The well condition** is rebuilt from the label and the stage-3 channels are
+  discarded. Depth-to-time conversion is purely vertical and per trace, so the
+  time-domain log at trace `c` is exactly column `c` of the label; the number and
+  width of the wells are therefore free parameters at training time. The
+  configuration used here is 4 wells of 3 columns at stratified random positions,
+  without lateral interpolation between them.
+
+Lateral interpolation between the wells is off deliberately. These velocity
+models are laterally smooth, so linearly interpolating even 4 wells covering
+4.7% of the section reconstructs the truth to about 44 m/s MAE — close enough to
+the answer that any conclusion about how much the network relies on the wells
+would be meaningless.
 
 ## Salt body specification
 

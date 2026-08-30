@@ -48,7 +48,8 @@ to be accounted for.
 ## Installation
 
 ```bash
-git clone <repository-url> && cd CFM
+git clone https://github.com/zzh020614-wq/TDCFM-SeismicVelocityModeling.git
+cd TDCFM-SeismicVelocityModeling
 pip install -r requirements.txt          # or: pip install -e ".[train]"
 ```
 
@@ -179,17 +180,37 @@ Every random parameter of a sample is determined by
 use disjoint seed ranges, so the split is leak-free by construction and the
 whole dataset can be regenerated from the commands above.
 
-Within stage 3 each condition draws from its own seeded RNG sub-stream, so
-changing the settings of one condition cannot perturb the others. Training fixes
-the Python, NumPy and PyTorch seeds but does not enable CUDA's fully
-deterministic mode, so GPU runs are reproducible only up to floating-point
+Stage 3 drives the whole derivation of a sample from one `default_rng(seed)`,
+and the draw order is fixed: well count, well columns, Ricker frequency, then
+the imaging noise. Changing that order changes the dataset for a given seed.
+
+Training fixes the Python, NumPy and PyTorch seeds but does not enable CUDA's
+fully deterministic mode, so GPU runs are reproducible only up to floating-point
 non-determinism.
+
+Stages 1–3 have been verified to reproduce the original research pipeline
+bit-for-bit on matching seeds, for the label and for every condition channel the
+network receives.
+
+## Code availability
+
+All code needed to reproduce the results is in this repository under the MIT
+licence. It contains the synthetic dataset generator, the forward modelling of
+every condition, the model definition, the training loop, conditional sampling,
+and the evaluation metrics and baselines.
+
+* Full step-by-step reproduction instructions: [`docs/reproduce.md`](docs/reproduce.md)
+* Dataset construction, splits and parameter ranges: [`docs/dataset.md`](docs/dataset.md)
+* Runnable end-to-end example on a small dataset: `bash scripts/smoke_test.sh`
+* Unit tests: `python -m unittest discover -s tests` (57 tests, no GPU required)
+
+No third-party data is redistributed: the dataset is fully synthetic and is
+regenerated from the seeds documented in [`docs/dataset.md`](docs/dataset.md).
 
 ## Citation
 
-If you use this code, please cite the accompanying paper. See
-[`CITATION.cff`](CITATION.cff); update it with the final bibliographic details
-once the paper is accepted.
+If you use this code, please cite both the software and the accompanying paper.
+See [`CITATION.cff`](CITATION.cff).
 
 ## License
 
