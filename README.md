@@ -1,7 +1,10 @@
 # tdcfm — time-domain conditional flow matching for seismic velocity model building
 
-Reference implementation accompanying the manuscript submitted to *Computers &
-Geosciences*.
+Reference implementation accompanying the manuscript
+
+> Zehao Zhao, "Well-constrained multi-information conditional flow matching for
+> seismic initial velocity model building", submitted to *Computers &
+> Geosciences*.
 
 The method generates a **time-domain interval velocity model** `V_int(τ, x)` on
 a 256 × 256 grid from several conditions that are routinely available in a
@@ -209,8 +212,13 @@ regenerated from the seeds documented in [`docs/dataset.md`](docs/dataset.md).
 
 ## Citation
 
-If you use this code, please cite both the software and the accompanying paper.
-See [`CITATION.cff`](CITATION.cff).
+If you use this code, please cite both the software and the accompanying paper:
+
+> Zehao Zhao, "Well-constrained multi-information conditional flow matching for
+> seismic initial velocity model building", *Computers & Geosciences* (submitted).
+
+Machine-readable metadata is in [`CITATION.cff`](CITATION.cff); the volume,
+pages and DOI are added once the paper is accepted.
 
 ## License
 
