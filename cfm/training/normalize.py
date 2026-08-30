@@ -1,6 +1,6 @@
 """Per-channel conversion between physical units and ``[-1, 1]`` (NumPy only).
 
-Channel conventions (see ``tdcfm.conditions.config.COND_NAMES``)::
+Channel conventions (see ``cfm.conditions.config.COND_NAMES``)::
 
     target      interval velocity   [v_min, v_max] -> [-1, 1]
     cond[0] rms RMS velocity        [v_min, v_max] -> [-1, 1]

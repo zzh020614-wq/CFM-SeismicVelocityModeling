@@ -1,9 +1,9 @@
 # Salt body specification (class 4)
 
 Used by class 4 only; no other class places an anomalous body. Implemented in
-`tdcfm/synth/operators.py` (`generate_salt`, `_random_polygon`,
+`cfm/synth/operators.py` (`generate_salt`, `_random_polygon`,
 `_dome_perturbed`, `_clean`, `_off_top_sides`) and configured by
-`SaltCfg` in `tdcfm/synth/config.py`. One body per sample.
+`SaltCfg` in `cfm/synth/config.py`. One body per sample.
 
 ## Layouts
 

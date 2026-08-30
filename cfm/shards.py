@@ -164,7 +164,7 @@ def load_manifest(directory: str) -> dict:
     path = os.path.join(directory, "manifest.json")
     if not os.path.isfile(path):
         raise FileNotFoundError(
-            f"{path} not found -- {directory} is not a tdcfm stage output directory")
+            f"{path} not found -- {directory} is not a cfm stage output directory")
     with open(path) as f:
         return json.load(f)
 

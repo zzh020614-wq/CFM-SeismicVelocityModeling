@@ -23,7 +23,7 @@ The well condition written here is a placeholder. Depth-to-time conversion is
 purely vertical and per trace, so the time-domain log at trace ``c`` is exactly
 column ``c`` of the label; the training dataloader therefore rebuilds the wells
 from the label with the number and width set in ``TrainCfg`` (see
-``tdcfm.conditions.wells.build_wells``), and what stage 3 stored is overwritten.
+``cfm.conditions.wells.build_wells``), and what stage 3 stored is overwritten.
 Storing it anyway keeps a shard self-contained and readable on its own.
 """
 from __future__ import annotations

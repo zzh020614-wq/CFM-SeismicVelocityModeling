@@ -5,7 +5,7 @@ import unittest
 
 import numpy as np
 
-from tdcfm.timeconv.convert import (
+from cfm.timeconv.convert import (
     column_tau,
     column_tau_max,
     depth_to_time,

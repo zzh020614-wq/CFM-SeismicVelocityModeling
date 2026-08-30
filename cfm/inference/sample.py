@@ -1,6 +1,6 @@
 """Conditional sampling: checkpoint -> generated time-domain interval velocities.
 
-    python -m tdcfm.inference.sample --ckpt runs/train/otcfm/ckpt_step_79999.pt \\
+    python -m cfm.inference.sample --ckpt runs/train/otcfm/ckpt_step_79999.pt \\
         --data-dir data/stage3/val --n 8 --best-of 1 --out runs/samples
 
 The conditioning setup is restored from the checkpoint, never from the command

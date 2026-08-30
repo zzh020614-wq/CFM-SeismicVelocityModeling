@@ -1,6 +1,6 @@
 """Stage 1 entry point: batch synthesis of depth-domain velocity models.
 
-    python -m tdcfm.synth.generate --n-samples 20000 --seed-base 20260630 \\
+    python -m cfm.synth.generate --n-samples 20000 --seed-base 20260630 \\
         --out-dir data/stage1/train --shard-size 500 --fmt hdf5
 
 Guarantees

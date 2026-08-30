@@ -10,7 +10,7 @@ import unittest
 
 import numpy as np
 
-from tdcfm.training.flow import _sample_otcfm_batch, sample_flow_batch
+from cfm.training.flow import _sample_otcfm_batch, sample_flow_batch
 
 
 class _FakeIndices(np.ndarray):

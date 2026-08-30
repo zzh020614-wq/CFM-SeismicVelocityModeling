@@ -1,6 +1,6 @@
 """Stage 5 entry point: quantitative evaluation of a trained checkpoint.
 
-    python -m tdcfm.evaluation.evaluate \\
+    python -m cfm.evaluation.evaluate \\
         --ckpt runs/train/otcfm/ckpt_step_79999.pt \\
         --data-dir data/stage3/val --time-axis data/stage2/train/time_axis.json \\
         --n 500 --best-of 4 --ode-steps 100 --batch-size 8 --out runs/eval

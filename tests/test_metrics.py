@@ -5,7 +5,7 @@ import unittest
 
 import numpy as np
 
-from tdcfm.evaluation.metrics import (
+from cfm.evaluation.metrics import (
     aggregate_by_class,
     corr,
     dix_rms_consistency,
@@ -14,8 +14,8 @@ from tdcfm.evaluation.metrics import (
     ssim,
     well_consistency,
 )
-from tdcfm.training.config import TrainCfg, active_cond_channels, apply_overrides, cfg_from_ckpt
-from tdcfm.training.normalize import normalize_sample, unit_to_vel, vel_to_unit
+from cfm.training.config import TrainCfg, active_cond_channels, apply_overrides, cfg_from_ckpt
+from cfm.training.normalize import normalize_sample, unit_to_vel, vel_to_unit
 
 
 class TestMetrics(unittest.TestCase):

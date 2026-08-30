@@ -1,4 +1,4 @@
-# tdcfm — time-domain conditional flow matching for seismic velocity model building
+# cfm — well-constrained multi-information conditional flow matching for seismic initial velocity model building
 
 Reference implementation accompanying the manuscript
 
@@ -51,8 +51,8 @@ to be accounted for.
 ## Installation
 
 ```bash
-git clone https://github.com/zzh020614-wq/TDCFM-SeismicVelocityModeling.git
-cd TDCFM-SeismicVelocityModeling
+git clone https://github.com/zzh020614-wq/CFM-SeismicVelocityModeling.git
+cd CFM-SeismicVelocityModeling
 pip install -r requirements.txt          # or: pip install -e ".[train]"
 ```
 
@@ -77,34 +77,34 @@ Full commands, hardware notes and expected runtimes are in
 
 ```bash
 # stage 1  synthesise depth-domain velocity models (disjoint seed ranges)
-python -m tdcfm.synth.generate --n-samples 20000 --seed-base 20260630 \
+python -m cfm.synth.generate --n-samples 20000 --seed-base 20260630 \
     --out-dir data/stage1/train --shard-size 500
-python -m tdcfm.synth.generate --n-samples 2000  --seed-base 90000000 \
+python -m cfm.synth.generate --n-samples 2000  --seed-base 90000000 \
     --out-dir data/stage1/val   --shard-size 500
 
 # stage 2  depth-to-time conversion; the validation split reuses the training axis
-python -m tdcfm.timeconv.run --source-dir data/stage1/train \
+python -m cfm.timeconv.run --source-dir data/stage1/train \
     --out-dir data/stage2/train --n-t 256 --shard-size 500
-python -m tdcfm.timeconv.run --source-dir data/stage1/val \
+python -m cfm.timeconv.run --source-dir data/stage1/val \
     --out-dir data/stage2/val --shard-size 500 \
     --time-axis data/stage2/train/time_axis.json
 
 # stage 3  forward-model the conditions (both splits use the training axis)
 for split in train val; do
-  python -m tdcfm.conditions.run --source-dir data/stage1/$split \
+  python -m cfm.conditions.run --source-dir data/stage1/$split \
       --time-axis data/stage2/train/time_axis.json \
       --out-dir data/stage3/$split --shard-size 500
 done
 
 # stage 4  train
-python -m tdcfm.training.train --data-dir data/stage3/train \
+python -m cfm.training.train --data-dir data/stage3/train \
     --out-dir runs/train total_steps=80000 batch_size=48 amp=bf16
 
 # stage 5  evaluate, and check against the conventional baselines
-python -m tdcfm.evaluation.evaluate --ckpt runs/train/otcfm/ckpt_step_79999.pt \
+python -m cfm.evaluation.evaluate --ckpt runs/train/otcfm/ckpt_step_79999.pt \
     --data-dir data/stage3/val --time-axis data/stage2/train/time_axis.json \
     --n 500 --best-of 4 --ode-steps 100 --out runs/eval
-python -m tdcfm.evaluation.baselines --data-dir data/stage3/val \
+python -m cfm.evaluation.baselines --data-dir data/stage3/val \
     --time-axis data/stage2/train/time_axis.json \
     --ckpt runs/train/otcfm/ckpt_step_79999.pt --n 64
 ```
@@ -116,7 +116,7 @@ axis, so all splits share one time scale.
 ## Repository layout
 
 ```
-tdcfm/
+cfm/
   shards.py           sharded HDF5/npz dataset I/O, shared by all stages
   synth/              stage 1  six structural operators, five class recipes
   timeconv/           stage 2  depth-to-time conversion and its inverse
@@ -173,7 +173,7 @@ learn an identity map instead of a generative one.
 **Baselines matter more than the metric.** Under weak conditioning many
 velocity models are equally admissible and MAE stops discriminating. The model
 must beat the conventional strong baselines in
-`tdcfm.evaluation.baselines` — Dix inversion and lateral well interpolation —
+`cfm.evaluation.baselines` — Dix inversion and lateral well interpolation —
 not merely the trivial ones.
 
 ## Reproducibility

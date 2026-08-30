@@ -3,9 +3,9 @@ requires = ["setuptools>=64"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "tdcfm"
+name = "cfm"
 version = "1.0.0"
-description = "Time-domain conditional flow matching for seismic initial velocity model building"
+description = "Well-constrained multi-information conditional flow matching for seismic initial velocity model building"
 readme = "README.md"
 requires-python = ">=3.9"
 license = { text = "MIT" }
@@ -33,13 +33,13 @@ train = [
 ]
 
 [project.scripts]
-tdcfm-synth = "tdcfm.synth.generate:main"
-tdcfm-timeconv = "tdcfm.timeconv.run:main"
-tdcfm-conditions = "tdcfm.conditions.run:main"
-tdcfm-train = "tdcfm.training.train:main"
-tdcfm-sample = "tdcfm.inference.sample:main"
-tdcfm-evaluate = "tdcfm.evaluation.evaluate:main"
-tdcfm-baselines = "tdcfm.evaluation.baselines:main"
+cfm-synth = "cfm.synth.generate:main"
+cfm-timeconv = "cfm.timeconv.run:main"
+cfm-conditions = "cfm.conditions.run:main"
+cfm-train = "cfm.training.train:main"
+cfm-sample = "cfm.inference.sample:main"
+cfm-evaluate = "cfm.evaluation.evaluate:main"
+cfm-baselines = "cfm.evaluation.baselines:main"
 
 [tool.setuptools.packages.find]
-include = ["tdcfm*"]
+include = ["cfm*"]

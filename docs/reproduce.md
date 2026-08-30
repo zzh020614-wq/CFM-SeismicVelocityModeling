@@ -31,9 +31,9 @@ The two splits must use **disjoint seed ranges** — that is what makes the spli
 leak-free.
 
 ```bash
-python -m tdcfm.synth.generate --n-samples 20000 --seed-base 20260630 \
+python -m cfm.synth.generate --n-samples 20000 --seed-base 20260630 \
     --out-dir data/stage1/train --shard-size 500 --fmt hdf5
-python -m tdcfm.synth.generate --n-samples 2000 --seed-base 90000000 \
+python -m cfm.synth.generate --n-samples 2000 --seed-base 90000000 \
     --out-dir data/stage1/val --shard-size 500 --fmt hdf5
 ```
 
@@ -46,10 +46,10 @@ The training split derives the global time axis. **Every other split must reuse
 it**, or the splits end up on different time scales.
 
 ```bash
-python -m tdcfm.timeconv.run --source-dir data/stage1/train \
+python -m cfm.timeconv.run --source-dir data/stage1/train \
     --out-dir data/stage2/train --n-t 256 --shard-size 500 --fmt hdf5
 
-python -m tdcfm.timeconv.run --source-dir data/stage1/val \
+python -m cfm.timeconv.run --source-dir data/stage1/val \
     --out-dir data/stage2/val --shard-size 500 --fmt hdf5 \
     --time-axis data/stage2/train/time_axis.json
 ```
@@ -63,7 +63,7 @@ Both splits use the **training** time axis.
 
 ```bash
 for split in train val; do
-  python -m tdcfm.conditions.run --source-dir data/stage1/$split \
+  python -m cfm.conditions.run --source-dir data/stage1/$split \
       --time-axis data/stage2/train/time_axis.json \
       --out-dir data/stage3/$split --shard-size 500 --fmt hdf5
 done
@@ -83,7 +83,7 @@ smoothing, the imaging parameters or the grid requires rerunning this stage.
 Single GPU:
 
 ```bash
-python -m tdcfm.training.train \
+python -m cfm.training.train \
     --data-dir data/stage3/train --out-dir runs/train \
     total_steps=80000 batch_size=48 amp=bf16
 ```
@@ -92,7 +92,7 @@ Multiple GPUs with DDP — `batch_size` is **per GPU**, so the global batch is
 `batch_size × number of GPUs`:
 
 ```bash
-torchrun --standalone --nproc_per_node=2 --module tdcfm.training.train \
+torchrun --standalone --nproc_per_node=2 --module cfm.training.train \
     --data-dir data/stage3/train --out-dir runs/train \
     total_steps=80000 batch_size=24 amp=bf16
 ```
@@ -149,7 +149,7 @@ found a shortcut rather than learned to generate.
 ## 5. Evaluate
 
 ```bash
-python -m tdcfm.evaluation.evaluate \
+python -m cfm.evaluation.evaluate \
     --ckpt runs/train/otcfm/ckpt_step_79999.pt \
     --data-dir data/stage3/val --time-axis data/stage2/train/time_axis.json \
     --n 500 --best-of 4 --ode-steps 100 --batch-size 8 --out runs/eval
@@ -163,7 +163,7 @@ from one condition.
 Then the baselines the model has to beat:
 
 ```bash
-python -m tdcfm.evaluation.baselines --data-dir data/stage3/val \
+python -m cfm.evaluation.baselines --data-dir data/stage3/val \
     --time-axis data/stage2/train/time_axis.json \
     --ckpt runs/train/otcfm/ckpt_step_79999.pt --n 64 --model-mae <model MAE>
 ```
@@ -176,7 +176,7 @@ Only an improvement over the strongest group-B baseline is a real contribution.
 To draw samples without computing metrics:
 
 ```bash
-python -m tdcfm.inference.sample --ckpt runs/train/otcfm/ckpt_step_79999.pt \
+python -m cfm.inference.sample --ckpt runs/train/otcfm/ckpt_step_79999.pt \
     --data-dir data/stage3/val --n 8 --ode-steps 100 --out runs/samples
 ```
 

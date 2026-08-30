@@ -2,17 +2,17 @@
 
 Single GPU::
 
-    python -m tdcfm.training.train --data-dir data/stage3/train \\
+    python -m cfm.training.train --data-dir data/stage3/train \\
         --out-dir runs/train total_steps=80000 batch_size=48 amp=bf16
 
 Multi-GPU (DDP; ``batch_size`` is per GPU)::
 
-    torchrun --standalone --nproc_per_node=2 --module tdcfm.training.train \\
+    torchrun --standalone --nproc_per_node=2 --module cfm.training.train \\
         --data-dir data/stage3/train --out-dir runs/train \\
         total_steps=80000 batch_size=24
 
 Resume with ``--resume runs/train/otcfm/ckpt_step_30000.pt``. Any
-:class:`~tdcfm.training.config.TrainCfg` field can be overridden as a trailing
+:class:`~cfm.training.config.TrainCfg` field can be overridden as a trailing
 ``key=value`` argument.
 
 Outputs land in ``<out-dir>/<model>/``: ``ckpt_step_*.pt`` (the newest
@@ -241,7 +241,7 @@ def main():
         dist.barrier()
 
     if is_main:
-        print("==== tdcfm training ====")
+        print("==== cfm training ====")
         for k in ("data_dir", "image_size", "num_classes", "model", "lr",
                   "total_steps", "overfit"):
             print(f"  {k}: {getattr(cfg, k)}")

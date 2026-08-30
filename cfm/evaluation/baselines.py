@@ -1,6 +1,6 @@
 """Baselines the generative model has to beat.
 
-    python -m tdcfm.evaluation.baselines --data-dir data/stage3/val \\
+    python -m cfm.evaluation.baselines --data-dir data/stage3/val \\
         --time-axis data/stage2/train/time_axis.json \\
         --ckpt runs/train/otcfm/ckpt_step_79999.pt --n 64 --model-mae 120
 

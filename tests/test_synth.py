@@ -10,9 +10,9 @@ import unittest
 
 import numpy as np
 
-from tdcfm.synth.config import CLASS_TABLE, N_CLASSES, SynthCfg
-from tdcfm.synth.generate import build_assignment
-from tdcfm.synth.generator import ModelGenerator
+from cfm.synth.config import CLASS_TABLE, N_CLASSES, SynthCfg
+from cfm.synth.generate import build_assignment
+from cfm.synth.generator import ModelGenerator
 
 
 def _small_cfg() -> SynthCfg:

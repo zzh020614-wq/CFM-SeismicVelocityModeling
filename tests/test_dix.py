@@ -13,7 +13,7 @@ import unittest
 
 import numpy as np
 
-from tdcfm.conditions.dix import dix_forward, dix_inverse
+from cfm.conditions.dix import dix_forward, dix_inverse
 
 
 class TestDix(unittest.TestCase):

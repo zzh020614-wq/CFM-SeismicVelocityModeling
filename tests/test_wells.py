@@ -10,7 +10,7 @@ import unittest
 
 import numpy as np
 
-from tdcfm.conditions.wells import build_wells, interp_well_horizontal, well_columns, well_rng
+from cfm.conditions.wells import build_wells, interp_well_horizontal, well_columns, well_rng
 
 
 class TestWellColumns(unittest.TestCase):
@@ -67,8 +67,8 @@ class TestBuildWells(unittest.TestCase):
         log at trace c is exactly column c of the label. Rebuilding therefore
         stays consistent with the label no matter which columns are chosen.
         """
-        from tdcfm.conditions.config import CondCfg
-        from tdcfm.conditions.derive import derive_conditions, stack_cond
+        from cfm.conditions.config import CondCfg
+        from cfm.conditions.derive import derive_conditions, stack_cond
 
         rng = np.random.default_rng(1)
         v_depth = np.sort(rng.uniform(1600, 5200, size=(48, 96)), axis=0).astype(np.float32)

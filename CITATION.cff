@@ -1,6 +1,6 @@
 cff-version: 1.2.0
 message: "If you use this software, please cite both the software and the accompanying paper."
-title: "tdcfm: well-constrained multi-information conditional flow matching for seismic initial velocity model building"
+title: "cfm: well-constrained multi-information conditional flow matching for seismic initial velocity model building"
 abstract: >-
   Reference implementation of a conditional flow matching model that generates
   time-domain interval velocity models from an RMS velocity field, sparse well
@@ -10,7 +10,7 @@ version: "1.0.0"
 date-released: "2026-08-30"
 license: MIT
 type: software
-repository-code: "https://github.com/zzh020614-wq/TDCFM-SeismicVelocityModeling"
+repository-code: "https://github.com/zzh020614-wq/CFM-SeismicVelocityModeling"
 keywords:
   - flow matching
   - generative model

@@ -73,7 +73,7 @@ class ShardConditionDataset(Dataset):
 
     @classmethod
     def from_cfg(cls, cfg, data_dir: str, random_flip=None, overfit=None):
-        """Build from a :class:`~tdcfm.training.config.TrainCfg`.
+        """Build from a :class:`~cfm.training.config.TrainCfg`.
 
         Training, sampling and evaluation all construct the dataset this way, so
         they cannot drift apart in how the conditions are prepared.

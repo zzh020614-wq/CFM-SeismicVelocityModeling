@@ -3,7 +3,7 @@
 Reads the stage-1 depth-domain shards and the stage-2 ``time_axis.json``, and
 writes ``target`` plus the four condition channels.
 
-    python -m tdcfm.conditions.run --source-dir data/stage1/train \\
+    python -m cfm.conditions.run --source-dir data/stage1/train \\
         --time-axis data/stage2/train/time_axis.json \\
         --out-dir data/stage3/train --shard-size 500
 

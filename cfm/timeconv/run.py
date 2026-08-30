@@ -4,11 +4,11 @@ Two passes: (1) scan the whole set for the global ``T_max``, (2) convert every
 sample onto the resulting common time axis.
 
     # training split -- derives the axis and writes time_axis.json
-    python -m tdcfm.timeconv.run --source-dir data/stage1/train \\
+    python -m cfm.timeconv.run --source-dir data/stage1/train \\
         --out-dir data/stage2/train --n-t 256 --shard-size 500
 
     # validation split -- MUST reuse the training axis, never recompute it
-    python -m tdcfm.timeconv.run --source-dir data/stage1/val \\
+    python -m cfm.timeconv.run --source-dir data/stage1/val \\
         --out-dir data/stage2/val --time-axis data/stage2/train/time_axis.json
 
 Outputs

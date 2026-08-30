@@ -7,12 +7,12 @@ import unittest
 
 import numpy as np
 
-from tdcfm.conditions.config import COND_NAMES, CondCfg
-from tdcfm.conditions.derive import derive_conditions, stack_cond
-from tdcfm.conditions.dix import dix_forward
-from tdcfm.conditions.seismic import reflectivity, ricker
-from tdcfm.shards import ConditionShardWriter, VelocityShardWriter, read_velocity_shard
-from tdcfm.timeconv.convert import depth_to_time
+from cfm.conditions.config import COND_NAMES, CondCfg
+from cfm.conditions.derive import derive_conditions, stack_cond
+from cfm.conditions.dix import dix_forward
+from cfm.conditions.seismic import reflectivity, ricker
+from cfm.shards import ConditionShardWriter, VelocityShardWriter, read_velocity_shard
+from cfm.timeconv.convert import depth_to_time
 
 
 def _layered_depth_model(nz=48, nx=96, seed=0):
